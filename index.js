@@ -7,8 +7,8 @@ function log(logLine, logType) {
         "00".slice(0, (0 - d.getHours().toString().length)) + d.getHours() + ":" +
         "00".slice(0, (0 - d.getMinutes().toString().length)) + d.getMinutes() + ":" +
         "00".slice(0, (0 - d.getSeconds().toString().length)) + d.getSeconds();
-    let formattedLogLine = "[" + dateStr + " | " + logType + "]: " + logLine;
-    console.log(formattedLogLine);
+    let formattedLogLine = "[" + dateStr + " | " + logType + "]: " + logLine + "\n";
+    process.stdout.write(formattedLogLine);
 };
 
 function info(logLine) { log(logLine, "INFO") };
