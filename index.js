@@ -20,10 +20,10 @@ function log(logLine, logType) {
     if (cfg.useAnsiColours) {
         let ansi;
         switch (logType) {
-            case "INFO":
+            case " INFO":
                 ansi = "\x1b[0;37m";
                 break;
-            case "WARN":
+            case " WARN":
                 ansi = "\x1b[0;93m";
                 break;
             case "ERROR":
@@ -62,8 +62,8 @@ function config(obj) {
     };
 };
 
-function info(logLine) { log(logLine, "INFO") };
-function warn(logLine) { log(logLine, "WARN") };
+function info(logLine) { log(logLine, " INFO") };
+function warn(logLine) { log(logLine, " WARN") };
 function error(logLine) { log(logLine, "ERROR") };
 function fatal(logLine) { log(logLine, "FATAL") };
 function debug(logLine) {
