@@ -44,12 +44,9 @@ function log(logLine, logType) {
 };
 
 function config(obj) {
-    let keys = Object.keys(obj);
     let oldCfg = {};
     Object.assign(oldCfg, cfg);
-    for (let i in keys) {
-        cfg[keys[i]] = obj[keys[i]];
-    };
+    Object.assign(cfg, obj);
     if (oldCfg.logsDir !== cfg.logsDir) {
         const d = new Date();
         let logFile = cfg.logsDir + "/" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + "_" + Math.floor(d.getTime() / 1000) + ".log";
