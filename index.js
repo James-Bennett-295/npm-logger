@@ -1,20 +1,77 @@
+const fs = require("fs");
+
+let writeStream;
+let cfg = {
+    debugEnabled: false,
+    logsDir: null,
+    useAnsiColours: true
+};
+
 function log(logLine, logType) {
     let d = new Date();
-    let dateStr = 
+    let dateStr =
         d.getFullYear() + "-" +
         "00".slice(0, (0 - d.getMonth().toString().length)) + (d.getMonth() + 1) + "-" +
         "00".slice(0, (0 - d.getDate().toString().length)) + d.getDate() + "  " +
         "00".slice(0, (0 - d.getHours().toString().length)) + d.getHours() + ":" +
         "00".slice(0, (0 - d.getMinutes().toString().length)) + d.getMinutes() + ":" +
         "00".slice(0, (0 - d.getSeconds().toString().length)) + d.getSeconds();
-    let formattedLogLine = "[" + dateStr + " | " + logType + "]: " + logLine + "\n";
-    process.stdout.write(formattedLogLine);
+    let formattedLogLine = "[" + dateStr + " | " + logType + "]: " + logLine;
+    if (cfg.useAnsiColours) {
+        let ansi;
+        switch (logType) {
+            case "INFO":
+                ansi = "\x1b[0;37m";
+                break;
+            case "WARN":
+                ansi = "\x1b[0;93m";
+                break;
+            case "ERROR":
+                ansi = "\x1b[0;91m";
+                break;
+            case "FATAL":
+                ansi = "\x1b[0;31m";
+                break;
+            case "DEBUG":
+                ansi = "\x1b[0;92m";
+                break;
+        };
+        process.stdout.write(ansi + formattedLogLine + "\x1b[0m\n");
+    } else {
+        process.stdout.write(formattedLogLine + "\n");
+    };
+    if (writeStream) writeStream.write(formattedLogLine + "\n");
+};
+
+function config(obj) {
+    let keys = Object.keys(obj);
+    let oldCfg = {};
+    Object.assign(oldCfg, cfg);
+    for (let i in keys) {
+        cfg[keys[i]] = obj[keys[i]];
+    };
+    if (oldCfg.logsDir !== cfg.logsDir) {
+        const d = new Date();
+        let logFile = cfg.logsDir + "/" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + "_" + Math.floor(d.getTime() / 1000) + ".log";
+        logFile = logFile.replace("//", "/");
+        fs.promises.mkdir(cfg.logsDir, { recursive: true })
+            .then(() => {
+                writeStream = fs.createWriteStream(logFile);
+            })
+            .catch((err) => {
+                cfg.logsDir = null;
+                log("[LOGGER]: FAILED TO CREATE LOGS DIRECTORY AND WRITE STREAM: " + err, "ERROR");
+            });
+    };
 };
 
 function info(logLine) { log(logLine, "INFO") };
 function warn(logLine) { log(logLine, "WARN") };
 function error(logLine) { log(logLine, "ERROR") };
 function fatal(logLine) { log(logLine, "FATAL") };
-function debug(logLine) { log(logLine, "DEBUG") };
+function debug(logLine) {
+    if (!cfg.debugEnabled) return;
+    log(logLine, "DEBUG");
+};
 
-module.exports = { info, warn, error, fatal, debug };
+module.exports = { info, warn, error, fatal, debug, config };
