@@ -1,7 +1,9 @@
 "use strict";
 
 const fs = require("fs");
+const alert = require("./alert.js");
 
+let hasAlerted = false;
 let writeStream;
 let cfg = {
     debugEnabled: false,
@@ -37,6 +39,9 @@ function log(logLine, logType) {
             case "DEBUG":
                 ansi = "\x1b[0;92m";
                 break;
+            case "ALERT":
+                ansi = "\x1b[0;91m";
+                break;
         };
         process.stdout.write(ansi + formattedLogLine + "\x1b[0m\n");
     } else {
@@ -64,6 +69,13 @@ function config(obj) {
     };
 };
 
+function triggerAlert() {
+    log("[LOGGER]: triggerAlert() FUNCTION RAN", "DEBUG")
+    if (hasAlerted) return;
+    hasAlerted = true;
+    alert(log, cfg);
+};
+
 function info(logLine) { log(logLine, " INFO") };
 function warn(logLine) { log(logLine, " WARN") };
 function error(logLine) { log(logLine, "ERROR") };
@@ -73,4 +85,4 @@ function debug(logLine) {
     log(logLine, "DEBUG");
 };
 
-module.exports = { info, warn, error, fatal, debug, config };
+module.exports = { info, warn, error, fatal, debug, config, triggerAlert };
