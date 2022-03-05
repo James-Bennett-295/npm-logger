@@ -57,7 +57,6 @@ function config(obj) {
     if (oldCfg.logsDir !== cfg.logsDir) {
         const d = new Date();
         let logFile = cfg.logsDir + "/" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + "_" + Math.floor(d.getTime() / 1000) + ".log";
-        logFile = logFile.replace("//", "/");
         fs.promises.mkdir(cfg.logsDir, { recursive: true })
             .then(() => {
                 writeStream = fs.createWriteStream(logFile);
@@ -70,7 +69,7 @@ function config(obj) {
 };
 
 function triggerAlert() {
-    log("[LOGGER]: triggerAlert() FUNCTION RAN", "DEBUG")
+    if (cfg.debugEnabled) log("[LOGGER]: triggerAlert() FUNCTION RAN", "DEBUG");
     if (hasAlerted) return;
     hasAlerted = true;
     alert(log, cfg);
