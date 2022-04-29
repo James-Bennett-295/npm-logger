@@ -1,9 +1,7 @@
 "use strict";
 
 const fs = require("fs");
-const alert = require("./alert.js");
 
-let hasAlerted = false;
 let writeStream;
 let cfg = {
     debugEnabled: false,
@@ -69,10 +67,7 @@ function config(obj) {
 };
 
 function triggerAlert() {
-    if (cfg.debugEnabled) log("[LOGGER]: triggerAlert() FUNCTION RAN", "DEBUG");
-    if (hasAlerted) return;
-    hasAlerted = true;
-    alert(log, cfg);
+    if (cfg.debugEnabled) log("[LOGGER]: DEPRECIATED triggerAlert() FUNCTION RAN", "DEBUG");
 };
 
 function info(logLine) { log(logLine, " INFO") };
