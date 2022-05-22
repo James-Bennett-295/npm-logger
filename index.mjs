@@ -72,7 +72,12 @@ function triggerAlert() {
 
 function info(logLine) { log(logLine, " INFO") };
 function warn(logLine) { log(logLine, " WARN") };
-function error(logLine) { log(logLine, "ERROR") };
+function error(logLine, error) {
+    if (typeof error !== undefined && typeof error.stack !== undefined) {
+        logLine += error.stack;
+    }
+    log(logLine, "ERROR");
+};
 function fatal(logLine) { log(logLine, "FATAL") };
 function debug(logLine) {
     if (!cfg.debugEnabled) return;
