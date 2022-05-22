@@ -74,7 +74,7 @@ function info(logLine) { log(logLine, " INFO") }
 function warn(logLine) { log(logLine, " WARN") }
 function error(logLine, error) {
     if (typeof error !== undefined && typeof error.stack !== undefined) {
-        logLine += error.stack;
+        logLine += " " + error.stack;
     }
     log(logLine, "ERROR");
 }
