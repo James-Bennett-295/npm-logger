@@ -1,6 +1,6 @@
 {
   "name": "@james-bennett-295/logger",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "main": "index.mjs",
   "repository": {
     "type": "git",

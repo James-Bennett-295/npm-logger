@@ -74,7 +74,12 @@ function error(logLine, error) {
     }
     log(logLine, "ERROR");
 }
-function fatal(logLine) { log(logLine, "FATAL") }
+function fatal(logLine, error) {
+    if (typeof error !== undefined && typeof error.stack !== undefined) {
+        logLine += " " + error.stack;
+    }
+    log(logLine, "FATAL");
+}
 function debug(logLine) {
     if (!cfg.debugEnabled) return;
     log(logLine, "DEBUG");
