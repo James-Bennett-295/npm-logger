@@ -87,5 +87,4 @@ export default {
     fatal,
     debug,
     config,
-    triggerAlert
 }
