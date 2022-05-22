@@ -66,10 +66,6 @@ function config(obj) {
     }
 }
 
-function triggerAlert() {
-    if (cfg.debugEnabled) log("[LOGGER]: DEPRECIATED triggerAlert() FUNCTION RAN", "DEBUG");
-}
-
 function info(logLine) { log(logLine, " INFO") }
 function warn(logLine) { log(logLine, " WARN") }
 function error(logLine, error) {
