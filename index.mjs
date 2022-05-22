@@ -7,7 +7,7 @@ let cfg = {
     debugEnabled: false,
     logsDir: null,
     useAnsiColours: true
-};
+}
 
 function log(logLine, logType) {
     let d = new Date();
@@ -40,16 +40,16 @@ function log(logLine, logType) {
             case "ALERT":
                 ansi = "\x1b[0;91m";
                 break;
-        };
+        }
         process.stdout.write(ansi + formattedLogLine + "\x1b[0m\n");
     } else {
         process.stdout.write(formattedLogLine + "\n");
-    };
+    }
     if (writeStream) writeStream.write(formattedLogLine + "\n");
-};
+}
 
 function config(obj) {
-    let oldCfg = {};
+    let oldCfg = {}
     Object.assign(oldCfg, cfg);
     Object.assign(cfg, obj);
     if (oldCfg.logsDir !== cfg.logsDir) {
@@ -63,26 +63,26 @@ function config(obj) {
                 cfg.logsDir = null;
                 log("[LOGGER]: FAILED TO CREATE LOGS DIRECTORY AND WRITE STREAM: " + err, "ERROR");
             });
-    };
-};
+    }
+}
 
 function triggerAlert() {
     if (cfg.debugEnabled) log("[LOGGER]: DEPRECIATED triggerAlert() FUNCTION RAN", "DEBUG");
-};
+}
 
-function info(logLine) { log(logLine, " INFO") };
-function warn(logLine) { log(logLine, " WARN") };
+function info(logLine) { log(logLine, " INFO") }
+function warn(logLine) { log(logLine, " WARN") }
 function error(logLine, error) {
     if (typeof error !== undefined && typeof error.stack !== undefined) {
         logLine += error.stack;
     }
     log(logLine, "ERROR");
-};
-function fatal(logLine) { log(logLine, "FATAL") };
+}
+function fatal(logLine) { log(logLine, "FATAL") }
 function debug(logLine) {
     if (!cfg.debugEnabled) return;
     log(logLine, "DEBUG");
-};
+}
 
 export default {
     info,
@@ -92,4 +92,4 @@ export default {
     debug,
     config,
     triggerAlert
-};
+}
