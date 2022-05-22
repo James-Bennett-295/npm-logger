@@ -6,8 +6,5 @@
     "type": "git",
     "url": "git+https://github.com/James-Bennett-295/npm-logger.git"
   },
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^0.26.0"
-  }
+  "license": "MIT"
 }
