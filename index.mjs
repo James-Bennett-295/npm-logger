@@ -86,5 +86,5 @@ export default {
     error,
     fatal,
     debug,
-    config,
+    config
 }
