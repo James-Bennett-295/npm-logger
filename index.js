@@ -1,6 +1,6 @@
 "use strict";
 
-import fs from "fs";
+const fs = require("fs");
 
 let writeStream;
 let cfg = {
@@ -85,7 +85,7 @@ function debug(logLine) {
     log(logLine, "DEBUG");
 }
 
-export default {
+module.exports = {
     info,
     warn,
     error,
