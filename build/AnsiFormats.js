@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var AnsiFormats;
+(function (AnsiFormats) {
+    AnsiFormats[AnsiFormats["Bold"] = 1] = "Bold";
+    AnsiFormats[AnsiFormats["Dim"] = 2] = "Dim";
+    AnsiFormats[AnsiFormats["Italic"] = 3] = "Italic";
+    AnsiFormats[AnsiFormats["Underline"] = 4] = "Underline";
+    AnsiFormats[AnsiFormats["Flashing"] = 5] = "Flashing";
+    AnsiFormats[AnsiFormats["Strikethrough"] = 9] = "Strikethrough";
+    AnsiFormats[AnsiFormats["Black"] = 30] = "Black";
+    AnsiFormats[AnsiFormats["Red"] = 31] = "Red";
+    AnsiFormats[AnsiFormats["Green"] = 32] = "Green";
+    AnsiFormats[AnsiFormats["Yellow"] = 33] = "Yellow";
+    AnsiFormats[AnsiFormats["Blue"] = 34] = "Blue";
+    AnsiFormats[AnsiFormats["Purple"] = 35] = "Purple";
+    AnsiFormats[AnsiFormats["Cyan"] = 36] = "Cyan";
+    AnsiFormats[AnsiFormats["White"] = 37] = "White";
+    AnsiFormats[AnsiFormats["BlackBackground"] = 40] = "BlackBackground";
+    AnsiFormats[AnsiFormats["RedBackground"] = 41] = "RedBackground";
+    AnsiFormats[AnsiFormats["GreenBackground"] = 42] = "GreenBackground";
+    AnsiFormats[AnsiFormats["YellowBackground"] = 43] = "YellowBackground";
+    AnsiFormats[AnsiFormats["BlueBackground"] = 44] = "BlueBackground";
+    AnsiFormats[AnsiFormats["PurpleBackground"] = 45] = "PurpleBackground";
+    AnsiFormats[AnsiFormats["CyanBackground"] = 46] = "CyanBackground";
+    AnsiFormats[AnsiFormats["WhiteBackground"] = 47] = "WhiteBackground";
+    AnsiFormats[AnsiFormats["Grey"] = 90] = "Grey";
+    AnsiFormats[AnsiFormats["LightRed"] = 91] = "LightRed";
+    AnsiFormats[AnsiFormats["LightGreen"] = 92] = "LightGreen";
+    AnsiFormats[AnsiFormats["LightYellow"] = 93] = "LightYellow";
+    AnsiFormats[AnsiFormats["LightBlue"] = 94] = "LightBlue";
+    AnsiFormats[AnsiFormats["Pink"] = 95] = "Pink";
+    AnsiFormats[AnsiFormats["LightCyan"] = 96] = "LightCyan";
+    //LightWhite = 37 + 60,
+    AnsiFormats[AnsiFormats["GreyBackground"] = 100] = "GreyBackground";
+    AnsiFormats[AnsiFormats["LightRedBackground"] = 101] = "LightRedBackground";
+    AnsiFormats[AnsiFormats["LightGreenBackground"] = 102] = "LightGreenBackground";
+    AnsiFormats[AnsiFormats["LightYellowBackground"] = 103] = "LightYellowBackground";
+    AnsiFormats[AnsiFormats["LightBlueBackground"] = 104] = "LightBlueBackground";
+    AnsiFormats[AnsiFormats["PinkBackground"] = 105] = "PinkBackground";
+    AnsiFormats[AnsiFormats["LightCyanBackground"] = 106] = "LightCyanBackground";
+    //LightWhiteBackground = 37 + 10 + 60
+})(AnsiFormats || (AnsiFormats = {}));
+exports.default = AnsiFormats;

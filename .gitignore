@@ -1,4 +1,5 @@
+# ALSO ADD ITEMS TO .npmignore
+
 node_modules/
-logs/
-test.mjs
 package-lock.json
+test.js

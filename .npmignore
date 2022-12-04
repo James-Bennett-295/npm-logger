@@ -1,0 +1,8 @@
+# ALSO ADD ITEMS TO .gitignore
+
+node_modules/
+src/
+.gitattributes
+package-lock.json
+test.js
+tsconfig.json

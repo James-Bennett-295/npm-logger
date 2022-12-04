@@ -1,11 +1,26 @@
 {
   "name": "@james-bennett-295/logger",
-  "version": "2.2.5",
-  "main": "./index.js",
-  "types": "./index.d.ts",
+  "version": "3.0.0",
+  "description": "Customisable logger",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/James-Bennett-295/npm-logger.git"
+    "url": "git+https://github.com/james-bennett-295/npm-logger.git"
   },
-  "license": "MIT"
+  "author": "James Bennett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/james-bennett-295/npm-logger/issues"
+  },
+  "homepage": "https://github.com/james-bennett-295/npm-logger#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.9"
+  },
+  "dependencies": {
+    "@james-bennett-295/date": "^1.0.0"
+  }
 }
