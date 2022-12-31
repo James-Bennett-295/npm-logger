@@ -23,6 +23,7 @@ type Config = {
 const ansiReset = "\x1b[0m";
 
 function buildAnsi(formats: Array<AnsiFormats>): string {
+	if (formats.length === 0) return "";
 	return "\x1b[" + formats.join(";") + "m";
 }
 
@@ -47,7 +48,7 @@ const defaultConfig: Config = {
 
 class Logger {
 	private cfg: Config = defaultConfig;
-	constructor(config?: Config) {
+	constructor(config?: Partial<Config>) {
 		Object.assign(this.cfg, config);
 	}
 	private log(level: LogLevels, line: string): void {
@@ -88,4 +89,4 @@ class Logger {
 	}
 }
 
-export { Logger, LogLevels }
+export { Logger, LogLevels, AnsiFormats }

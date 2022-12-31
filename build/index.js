@@ -3,9 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LogLevels = exports.Logger = void 0;
+exports.AnsiFormats = exports.LogLevels = exports.Logger = void 0;
 const date_1 = require("@james-bennett-295/date");
 const AnsiFormats_1 = __importDefault(require("./AnsiFormats"));
+exports.AnsiFormats = AnsiFormats_1.default;
 var LogLevels;
 (function (LogLevels) {
     LogLevels[LogLevels["Debug"] = 0] = "Debug";
@@ -17,6 +18,8 @@ var LogLevels;
 exports.LogLevels = LogLevels;
 const ansiReset = "\x1b[0m";
 function buildAnsi(formats) {
+    if (formats.length === 0)
+        return "";
     return "\x1b[" + formats.join(";") + "m";
 }
 const defaultConfig = {

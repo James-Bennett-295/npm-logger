@@ -18,7 +18,7 @@ declare type Config = {
 };
 declare class Logger {
     private cfg;
-    constructor(config?: Config);
+    constructor(config?: Partial<Config>);
     private log;
     debug(line: string): void;
     info(line: string): void;
@@ -27,4 +27,4 @@ declare class Logger {
     fatal(data: string | Error): void;
     clearFormats(): void;
 }
-export { Logger, LogLevels };
+export { Logger, LogLevels, AnsiFormats };

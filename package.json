@@ -1,6 +1,6 @@
 {
   "name": "@james-bennett-295/logger",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Customisable logger",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
