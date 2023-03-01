@@ -43,9 +43,10 @@ const defaultConfig = {
 class Logger {
     constructor(config) {
         this.cfg = defaultConfig;
+        this.onLog = null;
         Object.assign(this.cfg, config);
     }
-    log(level, line) {
+    log(level, line, noEvent = false) {
         if (level < this.cfg.level)
             return;
         const levelName = this.cfg.levelNames[level];
@@ -55,6 +56,11 @@ class Logger {
         const formattedLine = ansiStart + txt + ansiReset;
         const out = (level === LogLevels.Error || level === LogLevels.Fatal) ? "stderr" : "stdout";
         process[out].write(formattedLine + "\r\n");
+        if (!noEvent && this.onLog !== null)
+            this.onLog({
+                level: level,
+                formattedLine: formattedLine
+            });
     }
     debug(line) {
         this.log(LogLevels.Debug, line);
@@ -65,10 +71,18 @@ class Logger {
     warn(line) {
         this.log(LogLevels.Warn, line);
     }
+    warnNoEvent(line) {
+        this.log(LogLevels.Warn, line, true);
+    }
     error(data) {
         var _a;
         const line = (typeof data === "string") ? data : ((_a = data.stack) !== null && _a !== void 0 ? _a : data.message);
         this.log(LogLevels.Error, line);
+    }
+    errorNoEvent(data) {
+        var _a;
+        const line = (typeof data === "string") ? data : ((_a = data.stack) !== null && _a !== void 0 ? _a : data.message);
+        this.log(LogLevels.Error, line, true);
     }
     fatal(data) {
         var _a;

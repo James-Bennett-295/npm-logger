@@ -20,6 +20,11 @@ type Config = {
 	dateFormat: string;
 }
 
+type Log = {
+	level: LogLevels;
+	formattedLine: string;
+}
+
 const ansiReset = "\x1b[0m";
 
 function buildAnsi(formats: Array<AnsiFormats>): string {
@@ -48,10 +53,11 @@ const defaultConfig: Config = {
 
 class Logger {
 	private cfg: Config = defaultConfig;
+	onLog: ((log: Log) => void) | null = null;
 	constructor(config?: Partial<Config>) {
 		Object.assign(this.cfg, config);
 	}
-	private log(level: LogLevels, line: string): void {
+	private log(level: LogLevels, line: string, noEvent: boolean = false): void {
 		if (level < this.cfg.level) return;
 		const levelName = this.cfg.levelNames[level];
 		const dateStr = (new JDate()).formatDate(this.cfg.dateFormat);
@@ -60,6 +66,10 @@ class Logger {
 		const formattedLine = ansiStart + txt + ansiReset;
 		const out = (level === LogLevels.Error || level === LogLevels.Fatal) ? "stderr" : "stdout";
 		process[out].write(formattedLine + "\r\n");
+		if (!noEvent && this.onLog !== null) this.onLog({
+			level: level,
+			formattedLine: formattedLine
+		});
 	}
 	debug(line: string) {
 		this.log(LogLevels.Debug, line);
@@ -70,9 +80,16 @@ class Logger {
 	warn(line: string) {
 		this.log(LogLevels.Warn, line);
 	}
+	warnNoEvent(line: string) {
+		this.log(LogLevels.Warn, line, true);
+	}
 	error(data: string | Error) {
 		const line = (typeof data === "string") ? data : (data.stack ?? data.message);
 		this.log(LogLevels.Error, line);
+	}
+	errorNoEvent(data: string | Error) {
+		const line = (typeof data === "string") ? data : (data.stack ?? data.message);
+		this.log(LogLevels.Error, line, true);
 	}
 	fatal(data: string | Error) {
 		const line = (typeof data === "string") ? data : (data.stack ?? data.message);
@@ -89,4 +106,4 @@ class Logger {
 	}
 }
 
-export { Logger, LogLevels, AnsiFormats }
+export { Logger, LogLevels, AnsiFormats, Log }

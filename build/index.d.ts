@@ -16,15 +16,22 @@ declare type Config = {
     };
     dateFormat: string;
 };
+declare type Log = {
+    level: LogLevels;
+    formattedLine: string;
+};
 declare class Logger {
     private cfg;
+    onLog: ((log: Log) => void) | null;
     constructor(config?: Partial<Config>);
     private log;
     debug(line: string): void;
     info(line: string): void;
     warn(line: string): void;
+    warnNoEvent(line: string): void;
     error(data: string | Error): void;
+    errorNoEvent(data: string | Error): void;
     fatal(data: string | Error): void;
     clearFormats(): void;
 }
-export { Logger, LogLevels, AnsiFormats };
+export { Logger, LogLevels, AnsiFormats, Log };
