@@ -22,6 +22,7 @@ type Config = {
 
 type Log = {
 	level: LogLevels;
+	line: string;
 	formattedLine: string;
 }
 
@@ -68,6 +69,7 @@ class Logger {
 		process[out].write(formattedLine + "\r\n");
 		if (!noEvent && this.onLog !== null) this.onLog({
 			level: level,
+			line: txt,
 			formattedLine: formattedLine
 		});
 	}

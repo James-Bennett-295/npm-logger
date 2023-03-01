@@ -59,6 +59,7 @@ class Logger {
         if (!noEvent && this.onLog !== null)
             this.onLog({
                 level: level,
+                line: txt,
                 formattedLine: formattedLine
             });
     }

@@ -18,6 +18,7 @@ declare type Config = {
 };
 declare type Log = {
     level: LogLevels;
+    line: string;
     formattedLine: string;
 };
 declare class Logger {
